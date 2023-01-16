@@ -10,7 +10,7 @@ const client = new Client({
   port: process.env.DB_PORT as unknown as number || 5432,
 });
 
-const path: string = './src/others';
+const path: string = './src/scripts';
 
 client.connect()
   .then(() => {
