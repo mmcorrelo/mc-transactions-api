@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": false,
+		"allowSyntheticDefaultImports": true,
+		"module": "commonjs",
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"target": "es6",
+		"skipLibCheck": true,
+		"strict": true,
+		"baseUrl": "./",
+		"paths": {
+			"@controllers/*": [
+				"src/controllers/*"
+			],
+			"@dto/*": [
+				"src/DTOs/*"
+			],
+			"@models/*": [
+				"src/models/*"
+			],
+			"@configs/*": [
+				"src/configs/*"
+			],
+			"@dal/*": [
+				"src/DALs/*"
+			],
+			"@routes/*": [
+				"src/routes/*"
+			],
+			"@routes": [
+				"src/routes/index",
+			],
+		}
+	},
+	"ts-node": {
+		"require": [
+			"tsconfig-paths/register"
+		]
+	},
+}
