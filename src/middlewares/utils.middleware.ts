@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { ITransactionInput } from '@models/transaction.model';
+import * as TransactionsCatalog from '@catalogs/transactions.catalog';
 
 const validatePayloadField = async (field: string, fieldKey: string, allowedKeys: Array<string>, req: Request, res: Response, next: NextFunction): Promise<void> => {
   if (!field || !allowedKeys.includes(field)) {
@@ -12,14 +13,18 @@ const validatePayloadField = async (field: string, fieldKey: string, allowedKeys
 
 const validateSearchableTransactionField = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const payload: { field: keyof ITransactionInput } = req.body as any;
-  const allowedKeys: Array<keyof ITransactionInput> = ['payment_method', 'purchase_category', 'country', 'euro_price', 'exchange_name', 'user_wallet'];
+  const allowedKeys: Array<keyof ITransactionInput> = TransactionsCatalog.transactions
+    .filter((t: TransactionsCatalog.ITransactionCatalog) => t.searchable)
+    .map((t: TransactionsCatalog.ITransactionCatalog) => t.key)
 
   validatePayloadField(payload.field, 'field', allowedKeys, req, res, next);
 };
 
 const validateNullableTransactionField = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const payload: { nullableField: keyof ITransactionInput } = req.body as any;
-  const allowedKeys: Array<keyof ITransactionInput> = ['zero_conf_time', 'time_to_onchain_conf', 'exchange_name', 'fee_rate', 'fee_estimates', 'user_wallet'];
+  const allowedKeys: Array<keyof ITransactionInput> = TransactionsCatalog.transactions
+    .filter((t: TransactionsCatalog.ITransactionCatalog) => t.nullable)
+    .map((t: TransactionsCatalog.ITransactionCatalog) => t.key)
 
   validatePayloadField(payload.nullableField, 'nullableField', allowedKeys, req, res, next);
 };

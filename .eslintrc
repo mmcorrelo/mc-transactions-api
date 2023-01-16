@@ -69,6 +69,10 @@
 						"newlines-between": "always",
 						"pathGroups": [
 							{
+								"pattern": "@catalogs",
+								"group": "internal"
+							},
+							{
 								"pattern": "@middlewares",
 								"group": "internal"
 							},
