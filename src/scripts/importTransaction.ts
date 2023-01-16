@@ -1,5 +1,6 @@
 
 const fs = require('fs');
+
 const { Client } = require('pg');
 
 const client = new Client({
@@ -27,6 +28,8 @@ client.connect()
         const zeroConfTime: string | null = row.zero_conf_time ? `'${row.zero_conf_time}'` : null;
         const createdTime: string | null = row.created_time ? `'${row.created_time}'` : null;
         const userWallet: string | null = row.user_wallet ? `'${row.user_wallet}'` : null;
+        const exchangeName: string | null = row.exchange_name ? `'${row.exchange_name}'` : null;
+
         const query: string = `INSERT INTO transactions (payment_method, purchase_category, country, created_time, euro_price, zero_conf_time, time_to_onchain_conf, is_from_exchange, exchange_name, fee_rate, fee_estimates, has_account, satoshi_amount, user_wallet, is_walletconnect) VALUES (
                     '${row.payment_method}', 
                     '${row.purchase_category}', 
@@ -36,7 +39,7 @@ client.connect()
                     ${zeroConfTime}, 
                     ${row.time_to_onchain_conf}, 
                     ${row.is_from_exchange === 1}, 
-                    '${row.exchange_name}',
+                    ${exchangeName},
                     ${row.fee_rate ? row.fee_rate : null}, 
                     ${row.fee_estimates ? row.fee_estimates : null}, 
                     ${row.has_account === 1}, 

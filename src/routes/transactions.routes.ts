@@ -1,8 +1,8 @@
+import * as TransactionsDTO from '@dto/transactions.dto';
 import { Router, Request, Response } from 'express';
 
 import * as TransactionsController from '@controllers/transactions.controller';
 import { ITransactionInput } from '@models/transaction.model';
-import * as TransactionsDTO from '@dto/transactions.dto';
 
 export const router = Router();
 
@@ -14,7 +14,7 @@ router.post('/add', async (req: Request, res: Response) => {
   return res.status(200).send(result);
 });
 
-router.get('/all', async (req: Request, res: Response) => res.status(200).send([{ result: 'hello' }]));
+router.get('/all', async (req: Request, res: Response) => res.status(200).send([]));
 
 
 export default router;
