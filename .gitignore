@@ -9,6 +9,7 @@ dist/
 build/
 package-lock.json
 .env
+src/scripts/*.js
 
 # Compiled Java class files
 *.class

@@ -69,6 +69,10 @@
 						"newlines-between": "always",
 						"pathGroups": [
 							{
+								"pattern": "@middlewares",
+								"group": "internal"
+							},
+							{
 								"pattern": "@routes",
 								"group": "internal"
 							},

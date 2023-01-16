@@ -30,9 +30,15 @@ router.use((req: Request, res: Response, next: NextFunction) => {
 router.use('/v1', AppRoutes);
 
 /** Error Handling */
+// TODO: Improve error handling & logs
+// eslint-disable-next-line
 router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(`Router error: ${err}`);
-  next();
+  
+  return res.status(400).json({
+    code: 400,
+    message: err.message,
+  });
 });
 
 
