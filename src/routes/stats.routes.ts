@@ -7,18 +7,25 @@ import * as StatsController from '@controllers/stats.controller';
 export const router = Router();
 
 // eslint-disable-next-line
-router.post('/breakdown', [UtilsMiddleware.validateTransactionFieldValue], async (req: Request, res: Response, next: NextFunction) => {
+router.post('/breakdown', [UtilsMiddleware.validateSearchableTransactionField], async (req: Request, res: Response, next: NextFunction) => {
   const payload: StatsDTO.IBreakdownStats = req.body;
-
-  const result = await StatsController.breakdown(payload);
+  const result: Array<StatsDTO.IBreakdownStatsResult> = await StatsController.breakdown(payload);
 
   return res.status(200).send(result);
 });
 
 // eslint-disable-next-line
-router.post('/trend', [UtilsMiddleware.validateTransactionFieldValue, UtilsMiddleware.validatePeriodFieldValue], async (req: Request, res: Response, next: NextFunction) => {
+router.post('/trend', [UtilsMiddleware.validateSearchableTransactionField, UtilsMiddleware.validatePeriodFieldValue], async (req: Request, res: Response, next: NextFunction) => {
   const payload: StatsDTO.ITrendStats = req.body;
-  const result = await StatsController.trend(payload);
+  const result: Array<StatsDTO.ITrendStatsResult> = await StatsController.trend(payload);
+
+  return res.status(200).send(result);
+});
+
+// eslint-disable-next-line
+router.post('/nullablePercentage', [UtilsMiddleware.validateSearchableTransactionField, UtilsMiddleware.validateNullableTransactionField], async (req: Request, res: Response, next: NextFunction) => {
+  const payload: StatsDTO.INUllableStats = req.body;
+  const result: Array<StatsDTO.INUllableStatsResult> = await StatsController.nullablePercentage(payload);
 
   return res.status(200).send(result);
 });

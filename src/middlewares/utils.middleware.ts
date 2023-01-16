@@ -10,11 +10,18 @@ const validatePayloadField = async (field: string, fieldKey: string, allowedKeys
   }
 };
 
-const validateTransactionFieldValue = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const validateSearchableTransactionField = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const payload: { field: keyof ITransactionInput } = req.body as any;
-  const allowedKeys: Array<keyof ITransactionInput> = ['ID', 'payment_method', 'purchase_category', 'country', 'created_time', 'euro_price', 'zero_conf_time', 'time_to_onchain_conf', 'is_from_exchange', 'exchange_name', 'fee_rate', 'fee_estimates', 'has_account', 'satoshi_amount', 'user_wallet', 'is_walletconnect'];
+  const allowedKeys: Array<keyof ITransactionInput> = ['payment_method', 'purchase_category', 'country', 'euro_price', 'exchange_name', 'user_wallet'];
 
   validatePayloadField(payload.field, 'field', allowedKeys, req, res, next);
+};
+
+const validateNullableTransactionField = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const payload: { nullableField: keyof ITransactionInput } = req.body as any;
+  const allowedKeys: Array<keyof ITransactionInput> = ['zero_conf_time', 'time_to_onchain_conf', 'exchange_name', 'fee_rate', 'fee_estimates', 'user_wallet'];
+
+  validatePayloadField(payload.nullableField, 'nullableField', allowedKeys, req, res, next);
 };
 
 const validatePeriodFieldValue = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -25,6 +32,7 @@ const validatePeriodFieldValue = async (req: Request, res: Response, next: NextF
 };
 
 export {
-  validateTransactionFieldValue,
+  validateSearchableTransactionField,
   validatePeriodFieldValue,
+  validateNullableTransactionField,
 };
