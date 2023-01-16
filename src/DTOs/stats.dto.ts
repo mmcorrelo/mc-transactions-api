@@ -1,28 +1,28 @@
 import { ITransactionInput } from '@models/transaction.model';
 
-interface IBreakdownStats {
+interface IBreakdownStatsPayload {
   field: keyof ITransactionInput;
 }
 
-interface IBreakdownStatsResult {
+interface IBreakdownStatsResponse {
   field: string;
   count: number
 }
 
-interface ITrendStats {
+interface ITrendStatsPayload {
   startDate: string;
   endEnd: string;
   period: 'days' | 'week' | 'month' | 'year';
   field: string;
 }
 
-interface ITrendStatsResult {
+interface ITrendStatsResponse {
   field: string;
   total: string;
   time: string;
 }
 
-interface INUllableStats {
+interface INUllableStatsPayload {
   startDate: string;
   endEnd: string;
   field: string;
@@ -30,7 +30,7 @@ interface INUllableStats {
   nullableField: string;
 }
 
-interface INUllableStatsResult {
+interface INUllableStatsResponse {
   field: string;
   count: number;
   avg: number;
@@ -38,10 +38,10 @@ interface INUllableStatsResult {
 }
 
 export {
-  IBreakdownStats,
-  IBreakdownStatsResult,
-  ITrendStats,
-  ITrendStatsResult,
-  INUllableStats,
-  INUllableStatsResult,
+  IBreakdownStatsPayload,
+  IBreakdownStatsResponse,
+  ITrendStatsPayload,
+  ITrendStatsResponse,
+  INUllableStatsPayload,
+  INUllableStatsResponse
 };

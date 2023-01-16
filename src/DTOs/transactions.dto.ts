@@ -1,4 +1,4 @@
-import { ITransactionInput } from '@models/transaction.model';
+import { ITransactionInput, ITransactionOuput } from '@models/transaction.model';
 
 interface ITransaction {
   id: number | undefined;
@@ -19,11 +19,12 @@ interface ITransaction {
   exchangeName: string | undefined;
 }
 
-interface ITransactionCreate extends ITransaction { }
+interface ITransactionCreatePayload extends ITransaction { }
+interface ITransactionCreateResponse extends ITransactionOuput { }
 
-interface ITransactionFilter { }
+interface ITransactionFilterPayload { }
 
-const toCreate: (payload: ITransactionCreate) => ITransactionInput = (payload: ITransactionCreate) => {
+const toCreate: (payload: ITransactionCreatePayload) => ITransactionInput = (payload: ITransactionCreatePayload) => {
   return {
     id: payload?.id,
     payment_method: payload.paymentMethod!,
@@ -45,7 +46,8 @@ const toCreate: (payload: ITransactionCreate) => ITransactionInput = (payload: I
 };
 
 export {
-  ITransactionCreate,
-  ITransactionFilter,
+  ITransactionCreatePayload,
+  ITransactionFilterPayload,
+  ITransactionCreateResponse,
   toCreate,
 };

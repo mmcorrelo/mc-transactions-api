@@ -3,7 +3,7 @@ import { fn, col, Op, literal } from 'sequelize';
 
 import Transaction from '@models/transaction.model';
 
-export const breakdown = async (payload: StatsDTO.IBreakdownStats): Promise<any> => {
+export const breakdown = async (payload: StatsDTO.IBreakdownStatsPayload): Promise<any> => {
   return Transaction.findAll({
     attributes: [
       [fn('COUNT', col('*')), 'count'],
@@ -14,7 +14,7 @@ export const breakdown = async (payload: StatsDTO.IBreakdownStats): Promise<any>
   });
 };
 
-export const trend = async (payload: StatsDTO.ITrendStats): Promise<any> => {
+export const trend = async (payload: StatsDTO.ITrendStatsPayload): Promise<any> => {
   const startedDate = new Date(payload.startDate);
   const endDate = new Date(payload.endEnd);
 
@@ -35,7 +35,7 @@ export const trend = async (payload: StatsDTO.ITrendStats): Promise<any> => {
   });
 };
 
-export const nullablePercentage = async (payload: StatsDTO.INUllableStats): Promise<any> => {
+export const nullablePercentage = async (payload: StatsDTO.INUllableStatsPayload): Promise<any> => {
   const startedDate = new Date(payload.startDate);
   const endDate = new Date(payload.endEnd);
   const resolution: number = Math.min(payload.resolution, 20);

@@ -1,6 +1,5 @@
 import * as TransactionsDAL from '@dal/transactions.dal';
+import * as TransactionsDTO from '@dto/transactions.dto';
+import { ITransactionInput } from '@models/transaction.model';
 
-import { ITransactionInput, ITransactionOuput } from '@models/transaction.model';
-
-
-export const create = (payload: ITransactionInput): Promise<ITransactionOuput> => TransactionsDAL.create(payload);
+export const create = (payload: ITransactionInput): Promise<TransactionsDTO.ITransactionCreateResponse> => TransactionsDAL.create(payload);
