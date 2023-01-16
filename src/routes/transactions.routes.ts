@@ -2,8 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import * as TransactionsController from '@controllers/transactions.controller';
 import { ITransactionInput } from '@models/transaction.model';
-
-import * as TransactionsDTO from 'src/DTOs/transactions.dto';
+import * as TransactionsDTO from '@dto/transactions.dto';
 
 export const router = Router();
 
