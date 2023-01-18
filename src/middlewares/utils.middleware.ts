@@ -31,7 +31,7 @@ const validateNullableTransactionField = async (req: Request, res: Response, nex
 
 const validatePeriodFieldValue = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const payload: { period: 'days' | 'week' | 'month' | 'year' } = req.body as any;
-  const allowedKeys: Array<string> = ['days', 'week', 'month', 'year'];
+  const allowedKeys: Array<string> = ['day', 'week', 'month', 'year'];
 
   validatePayloadField(payload.period, 'period', allowedKeys, req, res, next);
 };
