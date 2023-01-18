@@ -1,6 +1,7 @@
 import http from 'http';
 
 import express, { Express, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 
 import SQLInit from '@configs/init.config';
 import AppRoutes from '@routes';
@@ -9,22 +10,7 @@ const router: Express = express();
 
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
-router.use((req: Request, res: Response, next: NextFunction) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'origin, X-Requested-With,Content-Type,Accept, Authorization',
-  );
-
-  // set the CORS method headers
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST');
-    return res.status(200).json({});
-  }
-
-  return next();
-});
-
+router.use(cors())
 
 /** Routes */
 router.use('/v1', AppRoutes);

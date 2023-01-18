@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ITransactionInput } from '@models/transaction.model';
 import * as TransactionsCatalog from '@catalogs/transactions.catalog';
 
-const validatePayloadField = async (field: string, fieldKey: string, allowedKeys: Array<string>, req: Request, res: Response, next: NextFunction): Promise<void> => {
+const validatePayloadField = async (field: string, fieldKey: string, allowedKeys: Array<string>, req: Request, res: Response, next: NextFunction): Promise<void> => {  
   if (!field || !allowedKeys.includes(field)) {
     next(new Error(`The payload field '${fieldKey}' has the invalid value '${field}'`));
   } else {

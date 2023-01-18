@@ -5,15 +5,16 @@ interface IBreakdownStatsPayload {
 }
 
 interface IBreakdownStatsResponse {
-  field: string;
-  count: number
+  name: string;
+  value: number;
 }
 
 interface ITrendStatsPayload {
   startDate: string;
-  endEnd: string;
+  endDate: string;
   period: 'days' | 'week' | 'month' | 'year';
   field: string;
+  value?: string;
 }
 
 interface ITrendStatsResponse {
@@ -24,7 +25,7 @@ interface ITrendStatsResponse {
 
 interface INUllableStatsPayload {
   startDate: string;
-  endEnd: string;
+  endDate: string;
   field: string;
   resolution: number;
   nullableField: string;
