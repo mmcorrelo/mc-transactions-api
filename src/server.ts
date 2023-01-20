@@ -1,6 +1,6 @@
-import http from 'http';
-
+import https from 'https';
 import express, { Express, Request, Response, NextFunction } from 'express';
+import fs from 'fs';
 import cors from 'cors';
 
 import SQLInit from '@configs/init.config';
@@ -12,6 +12,16 @@ router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 router.use(cors())
 
+let certificatesPath = './certificates';
+
+if (process.env.NODE_ENV === 'production') {
+  certificatesPath = '/home/ubuntu/server/package'
+}
+console.log(certificatesPath)
+const key = fs.readFileSync(`${certificatesPath}/private.key`);
+const cert = fs.readFileSync(`${certificatesPath}/certificate.crt`);
+const cred = { key, cert }
+
 /** Routes */
 router.use('/v1', AppRoutes);
 
@@ -20,7 +30,7 @@ router.use('/v1', AppRoutes);
 // eslint-disable-next-line
 router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(`Router error: ${err}`);
-  
+
   return res.status(400).json({
     code: 400,
     message: err.message,
@@ -28,7 +38,7 @@ router.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 
-const httpServer = http.createServer(router);
+const httpServer = https.createServer(cred, router);
 const { SERVER_PORT } = process.env;
 
 SQLInit();

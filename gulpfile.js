@@ -37,7 +37,15 @@ function version() {
 function copyPackageJson() {
     console.log("Copying package.json file to build directory.");
     gulp.src('build/index.js.map', { read: false }).pipe(gulpClean());
+
     return gulp.src('package.json').pipe(gulp.dest('build/'));
+}
+
+function copyCertificates() {
+    console.log("Copying certificates...");
+    gulp.src('certificates/certificate.crt').pipe(gulp.dest('build/'))
+    gulp.src('certificates/private.key').pipe(gulp.dest('build/'))
+    return gulp.src('certificates/A1C1D15E94C07F8BA8A1762F2F81BF4C.txt').pipe(gulp.dest('build/'))
 }
 
 function installingDependencies() {
@@ -53,7 +61,7 @@ function packageFiles() {
 }
 
 
-const build = gulp.series(runWebpack, version, copyPackageJson, installingDependencies, packageFiles);
+const build = gulp.series(runWebpack, version, copyCertificates, copyPackageJson, installingDependencies, packageFiles);
 
 exports.build = build;
 exports.clean = clean;

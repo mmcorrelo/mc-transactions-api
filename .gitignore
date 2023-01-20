@@ -10,6 +10,7 @@ build/
 package-lock.json
 .env
 src/scripts/*.js
+certificates
 
 # Compiled Java class files
 *.class
